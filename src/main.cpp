@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
         fotograma++;
         Element personaje = spinner(21, fotograma) | bold | color(Color::Orange1) | bgcolor(Color::Black);
         // declaracion
-        Element dibujo = vbox({personaje, moto.GetElement(), bloque.GetElement()});
+        Element dibujo = hbox({personaje, moto.GetElement(), bloque.GetElement()});
         Screen pantalla = Screen::Create(Dimension::Full());
         Render(pantalla, dibujo);
         pantalla.Print();
