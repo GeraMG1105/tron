@@ -14,16 +14,32 @@ int main(int argc, char const *argv[])
 {
     this_thread::sleep_for(0.1s);
 
-    fstream archivo;
+    ifstream archivo;
     archivo.open("assets/images/moto.txt");
-    string moto;
-    archivo >> moto;
-    while (archivo.good())
-    {
-        archivo >>moto;
     
-    }
-    archivo.close();
+    Elements elementos;
+    string linea;
+    // Funcion para imprimir moto
+        while (getline(archivo,linea))
+        {
+            elementos.emplace_back(text(linea));
+        }
+        Element moto=vbox(elementos);
+        archivo.close();
+    
+    
+    // Funcion para imprimir todo el bloque
+        string linea2;
+        ifstream archivo2;
+        archivo2.open("assets/images/bloque.txt");
+        while (getline(archivo2, linea2))
+        {
+            elementos.emplace_back(text(linea2));
+
+        }
+        Element bloque=vbox(elementos);
+        archivo2.close();
+
     
 
 
@@ -33,8 +49,8 @@ int main(int argc, char const *argv[])
     {
     fotograma++;
     Element personaje = spinner(21,fotograma) | bold | color(Color::Orange1) | bgcolor(Color::Black);
-    Element eMoto = text(moto) | bold |color(Color::Red1);
-    Element dibujo = hbox({personaje, eMoto}); 
+    //declaracion 
+    Element dibujo = hbox({personaje, moto, bloque}); 
     Screen pantalla = Screen::Create(Dimension::Full());
     Render(pantalla,dibujo);
     pantalla.Print();
